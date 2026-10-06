@@ -1,0 +1,45 @@
+{
+  // ============================================================
+  //  IntelliSense configuration.
+  //
+  //  PREFERRED: once the ESP-IDF extension is installed, let it generate this
+  //  file with "ESP-IDF: Add .vscode configuration folder" -- it resolves every
+  //  toolchain path for the machine you are on.
+  //
+  //  The config below is the portable fallback. It leans on
+  //  build/compile_commands.json, which `tools/idf.cmd build` produces: run a
+  //  build once and IntelliSense picks up the real include paths and flags.
+  // ============================================================
+  "configurations": [
+    {
+      "name": "ESP-IDF",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${env:IDF_PATH}/components/**"
+      ],
+      "browse": {
+        "path": [
+          "${workspaceFolder}",
+          "${env:IDF_PATH}/components"
+        ],
+        "limitSymbolsToIncludedHeaders": false
+      },
+      // Fallback only. The authoritative values come from
+      // build/compile_commands.json, which the build generates from the target
+      // selected with `idf.py set-target`. Keep these in sync with it.
+      "defines": [
+        "ESP_PLATFORM",
+        "IDF_TARGET_ESP32",
+        "CONFIG_IDF_TARGET_ESP32"
+      ],
+      "cStandard": "c11",
+      // The project builds as gnu++26 (see the top-level CMakeLists.txt). If
+      // your C/C++ extension predates C++26 support and flags this value, set
+      // it to gnu++23 -- compile_commands.json still carries the real flags.
+      "cppStandard": "gnu++26",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+      "intelliSenseMode": "gcc-x86"
+    }
+  ],
+  "version": 4
+}

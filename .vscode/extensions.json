@@ -1,0 +1,11 @@
+{
+  // Recommended extensions for ESP-IDF development.
+  // VS Code will prompt to install these when the folder is opened.
+  "recommendations": [
+    "espressif.esp-idf-extension",
+    "ms-vscode.cpptools",
+    "ms-vscode.cmake-tools",
+    "twxs.cmake",
+    "ms-vscode.hexeditor"
+  ]
+}

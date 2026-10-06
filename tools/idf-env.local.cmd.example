@@ -1,0 +1,33 @@
+@echo off
+REM ============================================================
+REM  TEMPLATE -- copy this file to `idf-env.local.cmd` in the same folder
+REM  and edit the paths for your machine.
+REM
+REM  `idf-env.local.cmd` is NOT tracked by git (see .gitignore), so every
+REM  machine can keep its own copy. `idf-env.cmd` calls it automatically as
+REM  soon as it exists, before trying any automatic detection.
+REM
+REM  You only need this file when automatic detection fails -- for example a
+REM  non-standard install location, or an installer whose activation script
+REM  this repository does not know about.
+REM
+REM  The example below is a real ESP-IDF v6.1 installation made with the
+REM  ESP-IDF Installation Manager (EIM) on Windows. Note the layout: EIM puts
+REM  the framework in a *versioned* folder (v6.1\esp-idf) and the tools in a
+REM  shared one -- which is why the classic export.bat does not work with it.
+REM ============================================================
+
+set "IDF_PATH=C:\Espressif\v6.1\esp-idf"
+set "IDF_TOOLS_PATH=C:\Espressif\tools"
+set "IDF_PYTHON_ENV_PATH=C:\Espressif\tools\python\v6.1\venv"
+
+REM Required by idf.py and the component manager. Without these it fails with
+REM "expected string or bytes-like object, got NoneType".
+set "ESP_IDF_VERSION=6.1"
+set "IDF_VERSION=6.1.0"
+
+REM Every tool folder must be on PATH. EIM uses version-suffixed directory
+REM names, so re-check these after a tool update. The authoritative list is the
+REM activation profile EIM writes next to its tools folder -- run it with -e
+REM to print the environment it would set.
+set "PATH=C:\Espressif\tools\python\v6.1\venv\Scripts;C:\Espressif\tools\xtensa-esp-elf\esp-15.2.0_20251204\xtensa-esp-elf\bin;C:\Espressif\tools\riscv32-esp-elf\esp-15.2.0_20251204\riscv32-esp-elf\bin;C:\Espressif\tools\esp32ulp-elf\2.38_20240113\esp32ulp-elf\bin;C:\Espressif\tools\cmake\4.0.3\bin;C:\Espressif\tools\ninja\1.12.1;C:\Espressif\tools\ccache\4.12.1\ccache-4.12.1-windows-x86_64;C:\Espressif\tools\idf-exe\1.0.3;%PATH%"

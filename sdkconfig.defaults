@@ -1,0 +1,26 @@
+# Project-wide defaults for sdkconfig.
+#
+# This file IS tracked by git; sdkconfig itself is not. Anything set here
+# overrides the ESP-IDF default and seeds the generated sdkconfig.
+#
+# These are deliberately generic starting points for a new project. Adjust
+# them per project -- and prefer `tools/idf.cmd menuconfig` over hand-editing,
+# which keeps sdkconfig and this file consistent.
+
+# Flash size assumed for the board. Change it to match your module.
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+
+# One large application partition, no OTA. Switch to a dual-app layout once
+# you need over-the-air updates.
+CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE=y
+
+# Logging: INFO by default. Lower it at runtime with core::set_log_level().
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+
+# Compiler: -Og, the ESP-IDF default for development. Switch to
+# CONFIG_COMPILER_OPTIMIZATION_SIZE or _PERF for release builds.
+CONFIG_COMPILER_OPTIMIZATION_DEBUG=y
+
+# NOTE: the target chip is NOT set here. It is chosen once with
+# `tools/idf.cmd set-target <chip>` (VS Code task "ESP-IDF: set target"),
+# which writes CONFIG_IDF_TARGET into the generated sdkconfig.

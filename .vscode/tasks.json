@@ -1,0 +1,129 @@
+{
+  // ============================================================
+  //  ESP-IDF tasks -- powered by tools\idf.cmd
+  //
+  //  tools\idf.cmd activates the ESP-IDF environment and then forwards its
+  //  arguments to idf.py, so `idf.py` does not have to be on PATH. That makes
+  //  these tasks work from any VS Code terminal, on any machine, with or
+  //  without the ESP-IDF extension installed.
+  // ============================================================
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ESP-IDF: set target",
+      "detail": "Select the target chip. Run once, or after switching chips.",
+      "type": "shell",
+      "command": "${workspaceFolder}\\tools\\idf.cmd",
+      "args": ["set-target", "${input:target}"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: build",
+      "detail": "Compile the project (Ctrl+Shift+B).",
+      "type": "shell",
+      "command": "${workspaceFolder}\\tools\\idf.cmd",
+      "args": ["build"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$gcc"],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "ESP-IDF: fullclean",
+      "detail": "Delete the whole build directory.",
+      "type": "shell",
+      "command": "${workspaceFolder}\\tools\\idf.cmd",
+      "args": ["fullclean"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: flash",
+      "detail": "Flash the built firmware to the board.",
+      "type": "shell",
+      "command": "${workspaceFolder}\\tools\\idf.cmd",
+      "args": ["-p", "${input:port}", "flash"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: monitor",
+      "detail": "Open the serial monitor. Exit with Ctrl+]",
+      "type": "shell",
+      "command": "${workspaceFolder}\\tools\\idf.cmd",
+      "args": ["-p", "${input:port}", "monitor"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: flash & monitor",
+      "detail": "Flash, then open the serial monitor.",
+      "type": "shell",
+      "command": "${workspaceFolder}\\tools\\idf.cmd",
+      "args": ["-p", "${input:port}", "flash", "monitor"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$gcc"],
+      "group": { "kind": "test", "isDefault": true }
+    },
+    {
+      "label": "ESP-IDF: menuconfig",
+      "detail": "Open the Kconfig menu for sdkconfig.",
+      "type": "shell",
+      "command": "${workspaceFolder}\\tools\\idf.cmd",
+      "args": ["menuconfig"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: size",
+      "detail": "Report firmware size per component.",
+      "type": "shell",
+      "command": "${workspaceFolder}\\tools\\idf.cmd",
+      "args": ["size"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: erase flash",
+      "detail": "Erase the entire flash of the connected chip.",
+      "type": "shell",
+      "command": "${workspaceFolder}\\tools\\idf.cmd",
+      "args": ["-p", "${input:port}", "erase-flash"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: doctor",
+      "detail": "Check that the toolchain and environment are healthy.",
+      "type": "shell",
+      "command": "${workspaceFolder}\\tools\\idf.cmd",
+      "args": ["--version"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "port",
+      "type": "promptString",
+      "description": "Serial port (e.g. COM5 on Windows, /dev/ttyUSB0 on Linux).",
+      "default": "COM5"
+    },
+    {
+      "id": "target",
+      "type": "pickString",
+      "description": "Target chip",
+      "options": [
+        "esp32",
+        "esp32s2",
+        "esp32s3",
+        "esp32c2",
+        "esp32c3",
+        "esp32c6",
+        "esp32h2",
+        "esp32p4"
+      ],
+      "default": "esp32"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  // ============================================================
+  //  Debug configuration -- GDB + OpenOCD.
+  //
+  //  PREFERRED: let the ESP-IDF extension generate this file with
+  //  "ESP-IDF: Add .vscode configuration folder" -- it resolves the toolchain
+  //  paths for your machine and picks the right OpenOCD board config.
+  //
+  //  The config below uses the extension's own command variables so that no
+  //  absolute path is stored in the repository. It therefore requires the
+  //  ESP-IDF extension to be installed.
+  //
+  //  Requires a JTAG probe:
+  //    - built-in USB-JTAG on ESP32-S3 / ESP32-C3 / ESP32-C6
+  //    - an external probe (e.g. ESP-Prog) on classic ESP32
+  //
+  //  The program path follows the project name, which is derived from the
+  //  repository folder name -- see the top-level CMakeLists.txt.
+  // ============================================================
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "ESP-IDF: OpenOCD debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "MIMode": "gdb",
+      "miDebuggerPath": "${command:espIdf.getXtensaGdb}",
+      "program": "${workspaceFolder}/build/${workspaceFolderBasename}.elf",
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        { "name": "OPENOCD_SCRIPTS", "value": "${command:espIdf.getOpenOcdScripts}" }
+      ],
+      "externalConsole": false,
+      "logging": { "engineLogging": false, "trace": false },
+      "setupCommands": [
+        { "text": "target extended-remote :3333" },
+        { "text": "set remote hardware-watchpoint-limit 2" },
+        { "text": "monitor reset halt" },
+        { "text": "monitor gdb_sync" },
+        { "text": "thb app_main" },
+        { "text": "c" }
+      ]
+    }
+  ]
+}

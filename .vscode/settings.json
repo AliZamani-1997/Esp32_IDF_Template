@@ -1,0 +1,66 @@
+{
+  // ============================================================
+  //  VS Code workspace settings for ESP-IDF.
+  //
+  //  Deliberately free of machine-specific paths: this repository is a
+  //  template, and hard-coded toolchain paths would break on every other
+  //  machine. The ESP-IDF extension discovers the installation itself --
+  //  either from the ESP-IDF Installation Manager's record, or from the
+  //  one-time "ESP-IDF: Configure ESP-IDF Extension" wizard.
+  //
+  //  If a machine needs pinned paths, put them in user settings, or in a
+  //  workspace file you do not commit.
+  // ============================================================
+
+  // --- ESP-IDF extension --------------------------------------------------
+  "idf.enableCCache": true,
+  "idf.flashType": "UART",
+  "idf.monitorBaudRate": "115200",
+  // No "idf.openOcdConfigs" here on purpose: the JTAG board config depends on
+  // your hardware. Pick it in "ESP-IDF: Configure ESP-IDF Extension", or add
+  // e.g. ["board/esp32-wrover-kit-3.3v.cfg"] for that board.
+
+  // --- C/C++ / IntelliSense ----------------------------------------------
+  "C_Cpp.intelliSenseEngine": "default",
+  "C_Cpp.intelliSenseEngineFallback": "enabled",
+  "C_Cpp.errorSquiggles": "enabled",
+  "C_Cpp.default.cStandard": "c11",
+  "C_Cpp.default.cppStandard": "gnu++26",
+
+  // --- Editor -------------------------------------------------------------
+  "files.associations": {
+    "*.c": "c",
+    "*.h": "cpp",
+    "*.cpp": "cpp",
+    "*.hpp": "cpp",
+    "sdkconfig": "kconfig",
+    "sdkconfig.defaults": "kconfig",
+    "CMakeLists.txt": "cmake"
+  },
+  "files.exclude": {
+    "**/build": true,
+    "**/managed_components": true,
+    "**/.cache": true
+  },
+  "search.exclude": {
+    "**/build": true,
+    "**/managed_components": true
+  },
+  "editor.formatOnSave": false,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "[c]": {
+    "editor.tabSize": 4
+  },
+  "[cpp]": {
+    "editor.tabSize": 4
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // --- Terminal -----------------------------------------------------------
+  // CMD is the default because the helper scripts in tools/ are .cmd files.
+  // The extension's own "ESP-IDF Terminal" comes pre-activated and needs
+  // none of that.
+  "terminal.integrated.defaultProfile.windows": "Command Prompt"
+}
